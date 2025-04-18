@@ -20,6 +20,7 @@ COPY . .
 # Create necessary directories
 RUN mkdir -p uploads output
 RUN chmod 777 uploads output
+RUN chmod 755 static
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \

@@ -6,42 +6,196 @@
     <title>PowerPoint Splitter</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primrose-midnight: #09212E;
+            --primrose-lime: #B8DD70;
+            --primrose-green: #78C57E;
+            --primrose-blue: #2C9CA0;
+            --primrose-drumstick: #69369F;
+        }
+        
+        body {
+            background-color: var(--primrose-midnight);
+            color: white !important;
+        }
+        
+        /* Global text color overrides */
+        body, p, span, div, li, a, label, input::placeholder, textarea::placeholder, 
+        .form-control, .text-muted, small, .card-text, .card-body {
+            color: white !important;
+        }
+        
+        /* Make sure form controls have white text */
+        .form-control {
+            color: white !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            border-color: var(--primrose-blue) !important;
+        }
+        
+        /* For help text and placeholder text */
+        .text-muted, .form-text, .text-secondary, ::placeholder {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+        
+        /* Ensure code blocks and tags are clearly visible */
+        code, pre, .tag, .badge:not(.bg-primary) {
+            color: var(--primrose-lime) !important;
+            background-color: rgba(9, 33, 46, 0.5) !important;
+        }
+        
+        /* Make links stand out */
+        a:not(.btn) {
+            color: var(--primrose-lime) !important;
+            text-decoration: underline;
+        }
+        
+        a:not(.btn):hover {
+            color: var(--primrose-green) !important;
+        }
+        
         .container {
             max-width: 800px;
         }
+        
         .upload-container {
-            border: 2px dashed #ccc;
+            border: 2px dashed var(--primrose-green);
             border-radius: 5px;
             padding: 20px;
             text-align: center;
             margin-bottom: 20px;
+            background-color: rgba(9, 33, 46, 0.7);
         }
+        
         .file-input {
             display: none;
         }
+        
         .file-label {
-            background-color: #007bff;
-            color: white;
+            background-color: var(--primrose-lime);
+            color: var(--primrose-midnight);
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
         }
+        
         .file-label:hover {
-            background-color: #0069d9;
+            background-color: var(--primrose-green);
         }
+        
         .selected-file {
             margin-top: 10px;
+            color: var(--primrose-lime);
         }
+        
         .footer {
             margin-top: 50px;
             padding-top: 20px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--primrose-blue);
+            color: var(--primrose-lime);
+        }
+        
+        .btn-primary {
+            background-color: var(--primrose-lime);
+            color: var(--primrose-midnight);
+            border-color: var(--primrose-lime);
+            font-weight: bold;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primrose-green);
+            border-color: var(--primrose-green);
+            color: var(--primrose-midnight);
+        }
+        
+        .btn-success {
+            background-color: var(--primrose-green);
+            border-color: var(--primrose-green);
+            color: var(--primrose-midnight);
+            font-weight: bold;
+        }
+        
+        .btn-success:hover {
+            background-color: var(--primrose-blue);
+            border-color: var(--primrose-blue);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--primrose-drumstick);
+            border-color: var(--primrose-drumstick);
+        }
+        
+        .btn-outline-secondary {
+            color: var(--primrose-lime);
+            border-color: var(--primrose-lime);
+        }
+        
+        .btn-outline-secondary:hover {
+            background-color: var(--primrose-lime);
+            color: var(--primrose-midnight);
+        }
+        
+        .card {
+            background-color: rgba(9, 33, 46, 0.85);
+            border: 1px solid var(--primrose-blue);
+        }
+        
+        .card-header.bg-primary {
+            background-color: var(--primrose-blue) !important;
+        }
+        
+        .card-header.bg-success {
+            background-color: var(--primrose-green) !important;
+            color: var(--primrose-midnight) !important;
+        }
+        
+        .card-header.bg-info {
+            background-color: var(--primrose-lime) !important;
+            color: var(--primrose-midnight) !important;
+        }
+        
+        .badge.bg-primary {
+            background-color: var(--primrose-lime) !important;
+            color: var(--primrose-midnight);
+        }
+        
+        .list-group-item {
+            background-color: rgba(9, 33, 46, 0.8);
+            color: white;
+            border-color: var(--primrose-blue);
+        }
+        
+        .list-group-item:hover {
+            background-color: var(--primrose-blue);
+        }
+        
+        .alert-danger {
+            background-color: var(--primrose-drumstick);
+            color: white;
+            border-color: var(--primrose-drumstick);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primrose-lime);
+        }
+        
+        code {
+            color: var(--primrose-lime);
+        }
+        
+        .primrose-logo {
+            max-height: 120px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="text-center mb-4">PowerPoint Splitter</h1>
+        <div class="text-center">
+            <img src="/static/Stacked - Midnight - Colour.png" alt="Primrose Logo" class="primrose-logo">
+            <h1 class="mb-4">PowerPoint Splitter</h1>
+        </div>
         
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -55,7 +209,7 @@
         
         {% block content %}{% endblock %}
         
-        <div class="footer text-center text-muted">
+        <div class="footer text-center">
             <p>PowerPoint Splitter - Split PowerPoints based on slide tags</p>
         </div>
     </div>
