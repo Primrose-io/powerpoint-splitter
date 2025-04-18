@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">Upload PowerPoint File</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Upload a PowerPoint file with slide tags in notes. The format should be <code>[tag1,tag2,tag3]</code> at the end of your slide notes.</p>
+                <p class="card-text">Add <code>[*]</code> to slides that should appear in all split presentations.</p>
+                
+                <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+                    <div class="upload-container">
+                        <input type="file" name="file" id="file" class="file-input" accept=".ppt,.pptx" onchange="updateFileName()">
+                        <label for="file" class="file-label">Choose PowerPoint File</label>
+                        <div class="selected-file">
+                            <span id="fileName">No file selected</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success" id="uploadButton" disabled>
+                            <i class="bi bi-upload"></i> Upload & Process
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">How It Works</h5>
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li>Add tags to your PowerPoint slides by adding <code>[tag1,tag2]</code> at the end of slide notes</li>
+                    <li>Upload your presentation file</li>
+                    <li>The app creates separate presentations for each tag</li>
+                    <li>Each tagged slide appears only in presentations with matching tags</li>
+                    <li>Slides tagged with <code>[*]</code> appear in all presentations</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

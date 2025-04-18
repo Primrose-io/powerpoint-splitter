@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  powerpoint-splitter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: powerpoint-splitter
+    container_name: powerpoint-splitter
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./output:/app/output
+    environment:
+      - SECRET_KEY=your-secret-key-here
+      - PORT=5001
+    restart: unless-stopped
