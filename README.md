@@ -21,7 +21,7 @@ A web application that splits PowerPoint presentations into multiple separate pr
 ## Example
 
 If you have a presentation with 5 slides tagged as follows:
-- Slide 1: `[intro,*]`
+- Slide 1: `[*]`
 - Slide 2: `[healthcare]`
 - Slide 3: `[retail]`
 - Slide 4: `[healthcare,retail]`
@@ -70,11 +70,13 @@ docker run -p 5001:5001 -v $(pwd)/uploads:/app/uploads -v $(pwd)/output:/app/out
 ## Tagging Format
 
 Add tags to your PowerPoint slides by adding text in this format to the slide notes:
+
 ```
 [tag1,tag2,tag3]
 ```
 
 For slides that should appear in all presentations, use the universal tag:
+
 ```
 [*]
 ```
@@ -83,7 +85,7 @@ Tags should be placed at the end of the slide notes.
 
 ## Project Structure
 
-```
+```bash
 powerpoint_splitter/
 ├── app.py                # Flask application
 ├── docker-compose.yml    # Docker Compose configuration
@@ -102,17 +104,20 @@ powerpoint_splitter/
 For local development without Docker:
 
 1. Create a virtual environment:
+
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 2. Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 3. Run the development server:
+
 ```bash
 flask run
 ```
@@ -121,6 +126,8 @@ flask run
 
 [MIT License](https://opensource.org/licenses/MIT)
 
+It is provided 'as is' - with no warrenties
+
 ## Acknowledgements
 
-This project is based on the PowerPoint splitter script created by Simon.
+This project is based on the PowerPoint splitter script created by Primrose Intelligence Ltd.
